@@ -4,7 +4,6 @@ import pandas as pd
 import os
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-from tqdm.auto import tqdm
 
 
 cwd = os.getcwd()
