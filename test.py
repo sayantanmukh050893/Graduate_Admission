@@ -23,31 +23,31 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/predict-graduation-admission',methods=["POST"])
-def predict_api():
-    data = request.get_json()
-    df = pd.DataFrame.from_dict(data,orient="index").T
+# @app.route('/predict-graduation-admission',methods=["POST"])
+# def predict_api():
+#     data = request.get_json()
+#     df = pd.DataFrame.from_dict(data,orient="index").T
 
-    df["University Rating"] = df["University Rating"].astype("category")
-    df["Reasearch"] = df["Research"].astype("category")
+#     df["University Rating"] = df["University Rating"].astype("category")
+#     df["Reasearch"] = df["Research"].astype("category")
 
-    model = pickle.load(open(output_model_path_3,"rb"))
-    max_list = pickle.load(open(output_max_list_path,"rb"))
-    min_list = pickle.load(open(output_min_list_path,"rb"))
+#     model = pickle.load(open(output_model_path_3,"rb"))
+#     max_list = pickle.load(open(output_max_list_path,"rb"))
+#     min_list = pickle.load(open(output_min_list_path,"rb"))
 
-    numerical_columns = ["GRE Score","TOEFL Score","SOP","LOR","CGPA"]
+#     numerical_columns = ["GRE Score","TOEFL Score","SOP","LOR","CGPA"]
 
-    for max,min,actual in zip(max_list,min_list,numerical_columns):
-        df[actual] = np.abs((min-df[actual])/(max-df[actual]))
+#     for max,min,actual in zip(max_list,min_list,numerical_columns):
+#         df[actual] = np.abs((min-df[actual])/(max-df[actual]))
 
-    prediction = model.predict(df)
-    pre = prediction[0]
-    final_prediction = None
-    if(pre>1.0):
-        final_prediction = 1.0
-    else:
-        final_prediction = pre
-    return str("The probability of the candidate getting admission is {}%".format(np.round(final_prediction*100.0,2)))
+#     prediction = model.predict(df)
+#     pre = prediction[0]
+#     final_prediction = None
+#     if(pre>1.0):
+#         final_prediction = 1.0
+#     else:
+#         final_prediction = pre
+#     return str("The probability of the candidate getting admission is {}%".format(np.round(final_prediction*100.0,2)))
 
 
 @app.route('/predict-graduation-admission-frontend',methods=["POST"])
@@ -83,4 +83,4 @@ def predict_front_end():
 
 
 if __name__ == "__main__":
-    app.run(port=5001,debug=True)
+    app.run(debug=True)
