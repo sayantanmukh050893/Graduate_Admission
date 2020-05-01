@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Graduation Admission</title>
+  </head>
+  <body>
+    <h1 align="center">Graduation Admission</h1>
+    <form align="center" action="{{ url_for('predict_front_end')}}" method="post">
+
+      <label for="message">GRE Score:</label>
+      <input type="text" id="gre" name="gre"><br><br>
+
+      <label for="message">TOEFL Score:</label>
+      <input type="text" id="toefl" name="toefl"><br><br>
+
+      <label for="message">University Rating:</label>
+      <input type="text" id="university_rating" name="university_rating"><br><br>
+
+      <label for="message">SOP:</label>
+      <input type="text" id="sop" name="sop"><br><br>
+
+      <label for="message">LOR:</label>
+      <input type="text" id="lor" name="lor"><br><br>
+
+      <label for="message">CGPA:</label>
+      <input type="text" id="cgpa" name="cgpa"><br><br>
+
+      <label for="message">Research:</label>
+      <input type="text" id="research" name="research"><br><br>
+
+      <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+
+    </form>
+
+    <div align="center"><h3 align="center"> {{ prediction_text }}</h3></div>
+
+  </body>
+</html>
